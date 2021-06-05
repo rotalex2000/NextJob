@@ -9,11 +9,14 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { JobsComponent } from './jobs/jobs.component';
+import { ApplicationDialog } from './jobs/jobs.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatRippleModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { MatRippleModule } from '@angular/material/core';
     HomeComponent,
     CounterComponent,
     JobsComponent,
+    ApplicationDialog
   ],
+  entryComponents: [ApplicationDialog],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -35,7 +40,9 @@ import { MatRippleModule } from '@angular/material/core';
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
-    MatRippleModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

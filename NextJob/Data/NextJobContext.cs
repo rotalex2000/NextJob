@@ -15,5 +15,7 @@ namespace NextJob.Data
         }
 
         public DbSet<NextJob.Models.Job> Job { get; set; }
+
+        public DbSet<NextJob.Models.Application> Application { get; set; }
     }
 }
