@@ -17,10 +17,10 @@ namespace NextJob.Models
 
         public string Description { get; set; }
 
-        public string Workplace { get; set; }
+        public string Workplace { get; set; } // office/home
 
-        public string CareerLevel { get; set; }
+        public string CareerLevel { get; set; } // min years of xp
 
-        public string Type { get; set; }
+        public string Type { get; set; } // full-time/part-tinme
     }
 }
