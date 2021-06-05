@@ -7,9 +7,12 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { ApplicationDialog } from './jobs/jobs.component';
+import { AdminDialog } from './jobs/jobs.component';
+import { AddEditJobDialog } from './jobs/jobs.component';
+import { DeleteJobDialog } from './jobs/jobs.component';
+import { ApplicantsDialog } from './jobs/jobs.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatCardModule } from '@angular/material/card';
@@ -17,24 +20,27 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
     JobsComponent,
-    ApplicationDialog
+    ApplicationDialog,
+    AdminDialog,
+    AddEditJobDialog,
+    DeleteJobDialog,
+    ApplicantsDialog
   ],
-  entryComponents: [ApplicationDialog],
+  entryComponents: [ApplicationDialog, AdminDialog, AddEditJobDialog, DeleteJobDialog, ApplicantsDialog],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
+      { path: '', component: JobsComponent, pathMatch: 'full' },
       { path: 'jobs', component: JobsComponent },
     ]),
     BrowserAnimationsModule,
@@ -42,7 +48,8 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

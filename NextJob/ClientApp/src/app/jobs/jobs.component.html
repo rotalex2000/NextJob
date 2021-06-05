@@ -1,6 +1,7 @@
 <h1 id="tableLabel">Jobs</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<button mat-raised-button (click)="handleAuthentication()">{{ authStatus ? 'Log out' : 'Admin' }}</button>
+<button *ngIf="authStatus" mat-raised-button (click)="openAddEditJobDialog()">Add</button>
 
 <p *ngIf="!jobs"><em>Loading...</em></p>
 
@@ -15,8 +16,13 @@
         {{ job.description }}
       </p>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions *ngIf="!authStatus">
       <button mat-raised-button (click)="openApplicationDialog(job.id)">APPLY</button>
+    </mat-card-actions>
+    <mat-card-actions *ngIf="authStatus">
+      <button mat-raised-button (click)="openAddEditJobDialog(job)">EDIT</button>
+      <button mat-raised-button (click)="openDeleteJobDialog(job)">DELETE</button>
+      <button mat-raised-button (click)="openApplicantsDialog(job.id)">APPLICANTS</button>
     </mat-card-actions>
   </mat-card>
 </div>

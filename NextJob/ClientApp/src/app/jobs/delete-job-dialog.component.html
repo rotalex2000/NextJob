@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Job</h1>
+<div mat-dialog-content>
+  <p>Do you really want to delete the {{ data.title }} job?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="onDeleteClicked()" cdkFocusInitial>Delete</button>
+</div>

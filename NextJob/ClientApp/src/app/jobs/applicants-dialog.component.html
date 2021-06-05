@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Applicants</h1>
+<div mat-dialog-content>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let application of applications" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ application.firstName }}
+        </mat-panel-title>
+        <mat-panel-description>
+          bla
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>{{ application.message }}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onDismissClick()">Dismiss</button>
+</div>

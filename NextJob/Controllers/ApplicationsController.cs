@@ -42,6 +42,23 @@ namespace NextJob.Controllers
             return application;
         }
 
+        // GET: api/Applications/job/{jobId}
+        [HttpGet("job/{jobId}")]
+        public async Task<ActionResult<Application>> GetApplicationsByJob(Guid jobId)
+        {
+            try
+            {
+                var applications = await _context.Application.Where(a => a.JobID == jobId).ToListAsync();
+                if (!applications.Any())
+                    return NotFound();
+                return Ok(applications);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
         // PUT: api/Applications/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

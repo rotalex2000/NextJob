@@ -1,9 +1,9 @@
 export interface Application {
   id: string
   jobId: string
-  candidateFirstName: string
-  candidateLastName: string
-  candidateEmail: string
-  candidatePhone: string
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
   message: string
 }

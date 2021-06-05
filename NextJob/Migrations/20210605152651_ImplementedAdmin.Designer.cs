@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NextJob.Data;
 
 namespace NextJob.Migrations
 {
     [DbContext(typeof(NextJobContext))]
-    partial class NextJobContextModelSnapshot : ModelSnapshot
+    [Migration("20210605152651_ImplementedAdmin")]
+    partial class ImplementedAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +32,7 @@ namespace NextJob.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -44,22 +46,22 @@ namespace NextJob.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("CandidateEmail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("CandidateFirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CandidateLastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CandidatePhone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("JobID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Message")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
