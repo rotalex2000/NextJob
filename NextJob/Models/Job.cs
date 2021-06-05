@@ -13,8 +13,6 @@ namespace NextJob.Models
 
         public string Field { get; set; }
 
-        public Guid EmployerID { get; set; }
-
         public string Description { get; set; }
 
         public string Workplace { get; set; } // office/home
