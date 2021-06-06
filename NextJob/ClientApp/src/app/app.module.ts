@@ -13,6 +13,7 @@ import { AdminDialog } from './jobs/jobs.component';
 import { AddEditJobDialog } from './jobs/jobs.component';
 import { DeleteJobDialog } from './jobs/jobs.component';
 import { ApplicantsDialog } from './jobs/jobs.component';
+import { NotificationsBottomSheet } from './nav-menu/nav-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatCardModule } from '@angular/material/card';
@@ -21,6 +22,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -32,9 +36,17 @@ import { MatExpansionModule } from '@angular/material/expansion';
     AdminDialog,
     AddEditJobDialog,
     DeleteJobDialog,
-    ApplicantsDialog
+    ApplicantsDialog,
+    NotificationsBottomSheet
   ],
-  entryComponents: [ApplicationDialog, AdminDialog, AddEditJobDialog, DeleteJobDialog, ApplicantsDialog],
+  entryComponents: [
+    ApplicationDialog,
+    AdminDialog,
+    AddEditJobDialog,
+    DeleteJobDialog,
+    ApplicantsDialog,
+    NotificationsBottomSheet
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -49,7 +61,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatBottomSheetModule,
+    MatIconModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

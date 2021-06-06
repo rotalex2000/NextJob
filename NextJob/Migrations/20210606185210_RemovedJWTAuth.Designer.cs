@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NextJob.Data;
 
 namespace NextJob.Migrations
 {
     [DbContext(typeof(NextJobContext))]
-    partial class NextJobContextModelSnapshot : ModelSnapshot
+    [Migration("20210606185210_RemovedJWTAuth")]
+    partial class RemovedJWTAuth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,14 +100,16 @@ namespace NextJob.Migrations
 
             modelBuilder.Entity("NextJob.Models.Notification", b =>
                 {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("Seen")
-                        .HasColumnType("bit");
+                    b.Property<string>("ApplicantName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Text")
+                    b.Property<string>("JobName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Seen")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");

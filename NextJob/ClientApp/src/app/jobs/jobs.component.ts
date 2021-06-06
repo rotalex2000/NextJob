@@ -1,10 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Job } from './Job'
-import { Application } from './Application';
+import { Job } from '../models/Job'
+import { Application } from '../models/Application';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Admin } from './Admin';
+import { Admin } from '../models/Admin';
+import { Notification } from '../models/Notification';
 
 @Component({
   selector: 'app-jobs',
@@ -27,7 +28,11 @@ export class JobsComponent {
       this.authStatus = result.isAuthenticated;
       console.log(this.authStatus)
     }, error => console.error(error));
-    http.get<Job[]>(baseUrl + 'api/jobs').subscribe(result => {
+    this.loadJobs();
+  }
+
+  private loadJobs(): void {
+    this.http.get<Job[]>(this.baseUrl + 'api/jobs').subscribe(result => {
       this.jobs = result;
     }, error => console.error(error));
   }
@@ -44,10 +49,6 @@ export class JobsComponent {
         phone: "",
         message: ""
       }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.reload()
     });
   }
 
@@ -67,10 +68,6 @@ export class JobsComponent {
         password: ""
       }
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.reload()
-    });
   }
 
   public logout() {
@@ -82,7 +79,7 @@ export class JobsComponent {
           password: result.password,
           isAuthenticated: false
         }).subscribe(result => {
-          this.reload()
+          window.location.reload();
         }, error => console.error(error))
       }
     })
@@ -111,10 +108,6 @@ export class JobsComponent {
           type: job.type
         }
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.reload();
-    });
   }
 
   public openDeleteJobDialog(job): void {
@@ -124,10 +117,6 @@ export class JobsComponent {
         id: job.id,
         title: job.title
       }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.reload()
     });
   }
 
@@ -139,13 +128,13 @@ export class JobsComponent {
       }
     });
   }
+}
 
-  public reload() {
-    let currentUrl = this.router.url;
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate([currentUrl]);
-  }
+const reload = (router) => {
+  let currentUrl = router.url;
+  router.routeReuseStrategy.shouldReuseRoute = () => false;
+  router.onSameUrlNavigation = 'reload';
+  router.navigate([currentUrl]);
 }
 
 // DIALOGS
@@ -160,7 +149,8 @@ export class ApplicationDialog {
     public dialogRef: MatDialogRef<ApplicationDialog>,
     @Inject(MAT_DIALOG_DATA) public data: ApplicationDialogData,
     private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string,) { }
+    @Inject('BASE_URL') private baseUrl: string,
+    private router: Router,) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -172,7 +162,21 @@ export class ApplicationDialog {
 
   public sendApplication(application) {
     this.http.post(this.baseUrl + 'api/applications', application).subscribe(result => {
-      this.dialogRef.close()
+      this.http.get<Job>(this.baseUrl + 'api/jobs/' + this.data.jobId).subscribe(result => {
+        console.log(`${this.data.firstName} ${this.data.lastName} applied for your ${result.title} job.`)
+        this.sendNotification(`${this.data.firstName} ${this.data.lastName} applied for your ${result.title} job.`)
+        this.dialogRef.close()
+      }, error => console.error(error));
+    }, error => console.error(error))
+  }
+
+  public sendNotification(text) {
+    let notification = <Notification>{
+      text: text,
+      seen: false
+    }
+    this.http.post(this.baseUrl + 'api/notifications', notification).subscribe(result => {
+      console.log('notification sent');
     }, error => console.error(error))
   }
 
@@ -188,7 +192,8 @@ export class AdminDialog {
     public dialogRef: MatDialogRef<AdminDialog>,
     @Inject(MAT_DIALOG_DATA) public data: AdminDialogData,
     private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string,) { }
+    @Inject('BASE_URL') private baseUrl: string,
+    private router: Router,) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -208,6 +213,7 @@ export class AdminDialog {
           isAuthenticated: true
         }).subscribe(result => {
           this.dialogRef.close()
+          window.location.reload();
         }, error => console.error(error))
       }
     }, error => console.error(error))
@@ -225,7 +231,8 @@ export class AddEditJobDialog {
     public dialogRef: MatDialogRef<AddEditJobDialog>,
     @Inject(MAT_DIALOG_DATA) public data: AddEditJobDialogData,
     private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string,) { }
+    @Inject('BASE_URL') private baseUrl: string,
+    private router: Router,) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -254,12 +261,14 @@ export class AddEditJobDialog {
   public addJob(job) {
     this.http.post(this.baseUrl + 'api/jobs', job).subscribe(result => {
       this.dialogRef.close();
+      reload(this.router)
     }, error => console.error(error))
   }
 
   public updateJob(job) {
     this.http.put(this.baseUrl + 'api/jobs/' + job.id, job).subscribe(result => {
       this.dialogRef.close();
+      reload(this.router)
     }, error => console.error(error))
   }
 
@@ -275,7 +284,8 @@ export class DeleteJobDialog {
     public dialogRef: MatDialogRef<DeleteJobDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DeleteJobDialogData,
     private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string,) { }
+    @Inject('BASE_URL') private baseUrl: string,
+    private router: Router,) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -288,6 +298,7 @@ export class DeleteJobDialog {
   public deleteJob(id: string) {
     this.http.delete(this.baseUrl + 'api/jobs/' + id).subscribe(result => {
       this.dialogRef.close();
+      reload(this.router)
     }, error => console.error(error))
   }
 

@@ -19,5 +19,8 @@ namespace NextJob.Data
         public DbSet<NextJob.Models.Application> Application { get; set; }
 
         public DbSet<NextJob.Models.Admin> Admin { get; set; }
+
+        public DbSet<NextJob.Models.Notification> Notification { get; set; }
+
     }
 }
