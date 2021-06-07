@@ -6,6 +6,7 @@ import { Application } from '../models/Application';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Admin } from '../models/Admin';
 import { Notification } from '../models/Notification';
+import { CompanyDescription } from '../models/CompanyDescription';
 
 @Component({
   selector: 'app-jobs',
@@ -126,6 +127,12 @@ export class JobsComponent {
       data: {
         id: jobId
       }
+    });
+  }
+
+  public openDescriptionDialog(): void {
+    const dialogRef = this.dialog.open(DescriptionDialog, {
+      width: '500px'
     });
   }
 }
@@ -321,6 +328,31 @@ export class ApplicantsDialog {
   ) {
     http.get<Application[]>(baseUrl + 'api/applications/job/' + this.data.id).subscribe(result => {
       this.applications = result;
+    }, error => console.error(error));
+  }
+
+  onDismissClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'description-dialog',
+  templateUrl: 'description-dialog.component.html',
+})
+export class DescriptionDialog {
+
+  public description: string
+
+  constructor(
+    public dialogRef: MatDialogRef<ApplicantsDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: ApplicantsDialogData,
+    private http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string,
+  ) {
+    http.get<CompanyDescription[]>(baseUrl + 'api/companydescriptions').subscribe(result => {
+      this.description = result[0].text;
     }, error => console.error(error));
   }
 

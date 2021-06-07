@@ -13,6 +13,7 @@ import { AdminDialog } from './jobs/jobs.component';
 import { AddEditJobDialog } from './jobs/jobs.component';
 import { DeleteJobDialog } from './jobs/jobs.component';
 import { ApplicantsDialog } from './jobs/jobs.component';
+import { DescriptionDialog } from './jobs/jobs.component';
 import { NotificationsBottomSheet } from './nav-menu/nav-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -38,6 +39,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     AddEditJobDialog,
     DeleteJobDialog,
     ApplicantsDialog,
+    DescriptionDialog,
     NotificationsBottomSheet
   ],
   entryComponents: [
@@ -46,6 +48,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     AddEditJobDialog,
     DeleteJobDialog,
     ApplicantsDialog,
+    DescriptionDialog,
     NotificationsBottomSheet,
   ],
   imports: [

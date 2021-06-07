@@ -1,6 +1,7 @@
 <h1 id="tableLabel">Jobs</h1>
 
 <button mat-raised-button (click)="handleAuthentication()">{{ authStatus ? 'Log out' : 'Admin' }}</button>
+<button *ngIf="!authStatus" mat-raised-button (click)="openDescriptionDialog()">About Us</button>
 <button *ngIf="authStatus" mat-raised-button (click)="openAddEditJobDialog()">Add</button>
 
 <p *ngIf="!jobs"><em>Loading...</em></p>

@@ -22,5 +22,7 @@ namespace NextJob.Data
 
         public DbSet<NextJob.Models.Notification> Notification { get; set; }
 
+        public DbSet<NextJob.Models.CompanyDescription> CompanyDescription { get; set; }
+
     }
 }
