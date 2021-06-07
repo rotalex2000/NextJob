@@ -28,6 +28,14 @@ namespace NextJob.Controllers
             return await _context.Notification.ToListAsync();
         }
 
+        // GET: api/Notifications/Count
+        [HttpGet("count")]
+        public async Task<ActionResult<int>> GetUnseenNotificationCount()
+        {
+            var applications = await _context.Notification.Where(n => n.Seen == false).ToListAsync();
+            return applications.Count();
+        }
+
         // GET: api/Notifications/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Notification>> GetNotification(Guid id)
@@ -95,6 +103,22 @@ namespace NextJob.Controllers
             }
 
             _context.Notification.Remove(notification);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // DELETE: api/Notifications
+        [HttpDelete]
+        public async Task<IActionResult> DeleteNotifications()
+        {
+            var notifications = await _context.Notification.ToListAsync();
+
+            foreach (Notification notification in notifications)
+            {
+                _context.Notification.Remove(notification);
+            }
+            
             await _context.SaveChangesAsync();
 
             return NoContent();

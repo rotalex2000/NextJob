@@ -24,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { MatIconModule } from '@angular/material/icon';
     AddEditJobDialog,
     DeleteJobDialog,
     ApplicantsDialog,
-    NotificationsBottomSheet
+    NotificationsBottomSheet,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -63,7 +64,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatExpansionModule,
     MatBottomSheetModule,
-    MatIconModule
+    MatIconModule,
+    MatBadgeModule
 
   ],
   providers: [],

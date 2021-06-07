@@ -1,1 +1,5 @@
+<button *ngIf="!notifications" mat-fab color="warn" aria-label="Clear notifications" (click)="onClearClicked()">
+  <mat-icon>home</mat-icon>
+</button>
+<p  *ngIf="notifications">No notifications.</p>
 <mat-card *ngFor="let notification of notifications">{{ notification.text }}</mat-card>

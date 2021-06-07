@@ -20,15 +20,10 @@
         [ngClass]="{ show: isExpanded }"
       >
         <ul class="navbar-nav flex-grow">
-          <!--<li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>-->
           <li *ngIf="authStatus" class="nav-item" [routerLinkActive]="['link-active']">
-            <a><mat-icon aria-hidden="false" aria-label="Notifications icon" (click)="openNotificationsBottomSheet()">notifications</mat-icon></a>
+            <button mat-icon-button aria-label="Notifications">
+              <mat-icon matBadge="{{ newNotificationsCount }}" matBadgeColor="warn" matBadgePosition="before" [matBadgeHidden]="newNotificationsCount == 0" aria-hidden="true" aria-label="Notifications icon" (click)="openNotificationsBottomSheet()">notifications</mat-icon>
+            </button>
           </li>
         </ul>
       </div>
