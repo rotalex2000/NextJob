@@ -1,32 +1,12 @@
 <header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-  >
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">NextJob</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li *ngIf="authStatus" class="nav-item" [routerLinkActive]="['link-active']">
-            <button mat-icon-button aria-label="Notifications">
-              <mat-icon matBadge="{{ newNotificationsCount }}" matBadgeColor="warn" matBadgePosition="before" [matBadgeHidden]="newNotificationsCount == 0" aria-hidden="true" aria-label="Notifications icon" (click)="openNotificationsBottomSheet()">notifications</mat-icon>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<mat-toolbar class="toolbar bg-yellow">
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Ceva companie random</span>
+  <span class="nav-spacer"></span>
+  <button *ngIf="authStatus" mat-icon-button class="color-white" aria-label="Notifications">
+    <mat-icon matBadge="{{ newNotificationsCount }}" matBadgeColor="warn" matBadgePosition="before" [matBadgeHidden]="newNotificationsCount == 0" aria-hidden="true" aria-label="Notifications icon" (click)="openNotificationsBottomSheet()">notifications</mat-icon>
+  </button>
+</mat-toolbar>
 </header>

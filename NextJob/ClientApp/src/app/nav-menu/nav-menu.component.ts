@@ -53,6 +53,7 @@ export class NavMenuComponent {
     bottomSheetRef.afterDismissed().subscribe(() => {
       console.log('Bottom sheet dismissed.');
       this.loadNotificationsCount()
+      console.log(this.newNotificationsCount)
     });
   }
 }
@@ -70,7 +71,7 @@ export class NotificationsBottomSheet {
     private router: Router,
     @Inject('BASE_URL') private baseUrl: string,) {
     this.http.get<Notification[]>(this.baseUrl + 'api/notifications').subscribe(result => {
-      this.notifications = result;
+      this.notifications = result.reverse();
       let i;
       for (i = 0; i < this.notifications.length; i++) {
         if (!this.notifications[i].seen) {

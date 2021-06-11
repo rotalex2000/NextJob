@@ -1,12 +1,8 @@
-<h1 id="tableLabel">Jobs</h1>
+<button mat-fab class="fab-button bg-green" (click)="handleAuthentication()"><mat-icon>{{ authStatus ? 'logout' : 'admin_panel_settings' }}</mat-icon></button>
+<button *ngIf="!authStatus" class="fab-button bg-yellow" mat-mini-fab (click)="openDescriptionDialog()"><mat-icon>description</mat-icon></button>
+<button *ngIf="authStatus" class="fab-button bg-yellow" mat-mini-fab (click)="openAddEditJobDialog()"><mat-icon>note_add</mat-icon></button>
 
-<button mat-raised-button (click)="handleAuthentication()">{{ authStatus ? 'Log out' : 'Admin' }}</button>
-<button *ngIf="!authStatus" mat-raised-button (click)="openDescriptionDialog()">About Us</button>
-<button *ngIf="authStatus" mat-raised-button (click)="openAddEditJobDialog()">Add</button>
-
-<p *ngIf="!jobs"><em>Loading...</em></p>
-
-<div *ngIf="jobs">
+<div *ngIf="jobs" class="jobs">
   <mat-card *ngFor="let job of jobs" class="job-card">
     <mat-card-header>
       <mat-card-title>{{ job.title }}</mat-card-title>
@@ -14,16 +10,28 @@
     </mat-card-header>
     <mat-card-content>
       <p>
-        {{ job.description }}
+        <i>
+          {{ job.description }}
+        </i>
       </p>
+      <p>Workplace: <strong>{{ job.workplace }}</strong></p>
+      <p><strong>{{ job.careerLevel }}</strong> years of experience</p>
     </mat-card-content>
     <mat-card-actions *ngIf="!authStatus">
-      <button mat-raised-button (click)="openApplicationDialog(job.id)">APPLY</button>
+      <button class="fab-button bg-yellow" mat-mini-fab (click)="openApplicationDialog(job.id)">
+        <mat-icon>send</mat-icon>
+      </button>
     </mat-card-actions>
     <mat-card-actions *ngIf="authStatus">
-      <button mat-raised-button (click)="openAddEditJobDialog(job)">EDIT</button>
-      <button mat-raised-button (click)="openDeleteJobDialog(job)">DELETE</button>
-      <button mat-raised-button (click)="openApplicantsDialog(job.id)">APPLICANTS</button>
+      <button class="fab-button bg-yellow" mat-mini-fab (click)="openAddEditJobDialog(job)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button class="fab-button bg-red" mat-mini-fab (click)="openDeleteJobDialog(job)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button class="fab-button bg-green" mat-mini-fab (click)="openApplicantsDialog(job.id)">
+        <mat-icon>description</mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

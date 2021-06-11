@@ -1,18 +1,23 @@
 <h1 mat-dialog-title>Applicants</h1>
 <div mat-dialog-content>
-  <mat-accordion>
+  <mat-accordion *ngIf="applications">
     <mat-expansion-panel *ngFor="let application of applications" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ application.firstName }}
+          {{ application.firstName }} {{ application.lastName }}
         </mat-panel-title>
         <mat-panel-description>
-          bla
+          {{ application.email }}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>{{ application.message }}</p>
+      <br />
+      <p><strong>Email:</strong> {{ application.email }}</p>
+      <p><strong>Phone:</strong> {{ application.phone }}</p>
+      <p><strong>Message:</strong> {{ application.message }}</p>
     </mat-expansion-panel>
   </mat-accordion>
+
+  <p *ngIf="!applications"><i>No applicants for now. You suck!</i></p>
 
 </div>
 <div mat-dialog-actions>

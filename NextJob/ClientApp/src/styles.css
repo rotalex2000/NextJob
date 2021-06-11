@@ -1,6 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+
+/* Color Scheme
+   blue #333D51
+   yellow #D3AC2B
+   grey #CBD0D8
+   white #F4F3EA */
+
 a {
   color: #0366d6;
 }
@@ -15,11 +22,127 @@ code {
   border-color: #1861ac;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+  background-color: #333D51;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.body {
+  -ms-overflow-style: none;
+}
 
 .job-card {
-  background-color: white;
+  background-color: #F4F3EA;
   color: black;
   margin-bottom: 20px;
+  border: 5px solid #D3AC2B;
+}
+
+.jobs {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+mat-dialog-container {
+  background: #333D51 !important;
+}
+
+.fab-button {
+  color: #F4F3EA !important;
+  margin-right: 5px !important;
+}
+
+.bg-blue {
+  background-color: #333D51 !important;
+}
+
+.bg-yellow {
+  background-color: #D3AC2B !important;
+}
+
+.bg-red {
+  background-color: #9E0000 !important;
+}
+
+.bg-green {
+  background-color: #00701A !important;
+}
+
+.text-blue {
+  color: #333D51 !important;
+}
+
+mat-card-subtitle {
+  color: #333D51 !important;
+  font-weight: bold !important;
+}
+
+mat-card-header {
+  
+}
+
+.mat-focused .mat-form-field-label {
+  color: #D3AC2B !important;
+}
+
+.mat-form-field-underline {
+  background-color: #D3AC2B !important;
+}
+
+.mat-form-field-ripple {
+  background-color: #D3AC2B !important;
+}
+
+mat-expansion-panel-header {
+  background-color: #D3AC2B !important;
+}
+
+mat-expansion-panel {
+  background-color: #9E7900 !important;
+}
+
+mat-bottom-sheet-container {
+  background-color: #333D51 !important;
+}
+
+.notification {
+  background-color: #333D51;
+  border: 2px solid #D3AC2B;
+  margin-top: 10px;
+}
+
+.notification-box {
+    padding: 20px;
+}
+
+.notification-new {
+  background-color: #9E0000 !important;
+}
+
+.mat-card-header {
+  border-bottom: 5px solid #D3AC2B;
+  padding-top: 10px !important;
+  background-color: #ffe89c !important;
+}
+
+.mat-card {
+  padding: 0 !important;
+}
+
+.mat-card-content {
+  padding: 10px !important;
+}
+
+.mat-card-actions {
+  padding: 15px !important;
 }

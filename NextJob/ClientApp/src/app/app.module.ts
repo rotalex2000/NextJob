@@ -26,6 +26,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatExpansionModule,
     MatBottomSheetModule,
     MatIconModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatDividerModule,
+    MatToolbarModule
 
   ],
   providers: [],

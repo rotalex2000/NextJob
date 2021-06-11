@@ -1,5 +1,5 @@
-<button *ngIf="!notifications" mat-fab color="warn" aria-label="Clear notifications" (click)="onClearClicked()">
-  <mat-icon>home</mat-icon>
-</button>
-<p  *ngIf="notifications">No notifications.</p>
-<mat-card *ngFor="let notification of notifications">{{ notification.text }}</mat-card>
+  <button *ngIf="notifications && notifications.length!=0" mat-mini-fab color="warn" aria-label="Clear notifications" (click)="onClearClicked()">
+    <mat-icon>delete</mat-icon>
+  </button>
+<p  *ngIf="notifications && notifications.length==0"><i>No notifications.</i></p>
+<mat-card class="notification" matBadge="1" [matBadgeHidden]="notification.seen" matBadgeColor="warn" *ngFor="let notification of notifications"><div class="notification-box">{{ notification.text }}</div></mat-card>

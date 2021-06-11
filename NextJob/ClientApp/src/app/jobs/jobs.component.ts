@@ -10,14 +10,12 @@ import { CompanyDescription } from '../models/CompanyDescription';
 
 @Component({
   selector: 'app-jobs',
-  templateUrl: './jobs.component.html'
+  templateUrl: './jobs.component.html',
 })
 export class JobsComponent {
   public authStatus: boolean = false;
   private adminId: string = "EFB5B29C-ED6A-434E-8444-86F7A1297128";
   public jobs: Job[];
-
-  // public application: Application = <Application>{}
 
   constructor(
     private http: HttpClient,
@@ -49,7 +47,7 @@ export class JobsComponent {
         email: "",
         phone: "",
         message: ""
-      }
+      },
     });
   }
 
