@@ -28,6 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatBadgeModule,
     MatDividerModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSnackBarModule
 
   ],
   providers: [],

@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Admin } from '../models/Admin';
 import { Notification } from '../models/Notification';
 import { CompanyDescription } from '../models/CompanyDescription';
+import { MatSnackBar } from "@angular/material";
 
 @Component({
   selector: 'app-jobs',
@@ -142,6 +143,13 @@ const reload = (router) => {
   router.navigate([currentUrl]);
 }
 
+const openSnackBar = (snackBar: MatSnackBar, message: string, action: string, background: string) => {
+  snackBar.open(message, action, {
+    duration: 3000,
+    panelClass: ['snack-bar-success', background]
+  });
+}
+
 // DIALOGS
 
 @Component({
@@ -155,7 +163,8 @@ export class ApplicationDialog {
     @Inject(MAT_DIALOG_DATA) public data: ApplicationDialogData,
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
-    private router: Router,) { }
+    private router: Router,
+    public snackBar: MatSnackBar) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -165,12 +174,16 @@ export class ApplicationDialog {
     this.sendApplication(this.data)
   }
 
+  openSnackBarSuccess(): void {
+  }
+
   public sendApplication(application) {
     this.http.post(this.baseUrl + 'api/applications', application).subscribe(result => {
       this.http.get<Job>(this.baseUrl + 'api/jobs/' + this.data.jobId).subscribe(result => {
         console.log(`${this.data.firstName} ${this.data.lastName} applied for your ${result.title} job.`)
         this.sendNotification(`${this.data.firstName} ${this.data.lastName} applied for your ${result.title} job.`)
         this.dialogRef.close()
+        openSnackBar(this.snackBar, "Application was successfully sent!", "Dismiss", "bg-blue")
       }, error => console.error(error));
     }, error => console.error(error))
   }
@@ -193,12 +206,15 @@ export class ApplicationDialog {
 })
 export class AdminDialog {
 
+  public isValid: boolean = true;
+
   constructor(
     public dialogRef: MatDialogRef<AdminDialog>,
     @Inject(MAT_DIALOG_DATA) public data: AdminDialogData,
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
-    private router: Router,) { }
+    private router: Router,
+    public snackBar: MatSnackBar) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -220,6 +236,8 @@ export class AdminDialog {
           this.dialogRef.close()
           window.location.reload();
         }, error => console.error(error))
+      } else {
+        openSnackBar(this.snackBar, "Wrong password, your computer entered SELF-DESTRUCTION phase.", "Say prayers", "bg-red")
       }
     }, error => console.error(error))
   }
@@ -237,7 +255,8 @@ export class AddEditJobDialog {
     @Inject(MAT_DIALOG_DATA) public data: AddEditJobDialogData,
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
-    private router: Router,) { }
+    private router: Router,
+    public snackBar: MatSnackBar) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -267,6 +286,7 @@ export class AddEditJobDialog {
     this.http.post(this.baseUrl + 'api/jobs', job).subscribe(result => {
       this.dialogRef.close();
       reload(this.router)
+      openSnackBar(this.snackBar, "Job was successfully added!", "Dismiss", "bg-blue")
     }, error => console.error(error))
   }
 
@@ -274,6 +294,7 @@ export class AddEditJobDialog {
     this.http.put(this.baseUrl + 'api/jobs/' + job.id, job).subscribe(result => {
       this.dialogRef.close();
       reload(this.router)
+      openSnackBar(this.snackBar, "Job was successfully updated!", "Dismiss", "bg-blue")
     }, error => console.error(error))
   }
 
@@ -290,7 +311,8 @@ export class DeleteJobDialog {
     @Inject(MAT_DIALOG_DATA) public data: DeleteJobDialogData,
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
-    private router: Router,) { }
+    private router: Router,
+    public snackBar: MatSnackBar) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -304,6 +326,7 @@ export class DeleteJobDialog {
     this.http.delete(this.baseUrl + 'api/jobs/' + id).subscribe(result => {
       this.dialogRef.close();
       reload(this.router)
+      openSnackBar(this.snackBar, "Job was successfully deleted!", "Dismiss", "bg-blue")
     }, error => console.error(error))
   }
 

@@ -146,3 +146,8 @@ mat-bottom-sheet-container {
 .mat-card-actions {
   padding: 15px !important;
 }
+
+.snack-bar-success {
+  color: #F4F3EA !important;
+  border: 3px solid #D3AC2B;
+}
